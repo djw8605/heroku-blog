@@ -42,7 +42,7 @@
           <section class="post">
             <blockquote class="blockquote">
               <h1 class="display-4"><a href="{{ post.post_url }}">{{ post.title }}</a></h1>
-              <footer class="blockquote-footer"><a href="{{ post.origin_blog }}">{{ post.origin_blog }}</a></footer>
+              <footer class="blockquote-footer"><a href="{{ post.blog.url }}">{{ post.blog.name }}</a></footer>
             </blockquote>
             <p class="post-content">
               {{ post.content }}
@@ -52,6 +52,11 @@
         </div>
         <div class="col-2">
           <!-- Blogs -->
+          <ul>
+            {% for blog in blogs %}
+            <li><a href="{{ blog.url }}">{{ blog.name }}</a></li>
+            {% endfor %}
+          </ul>
         </div>
       </div>
     </div>

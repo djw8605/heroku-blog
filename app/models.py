@@ -41,7 +41,7 @@ class Blog(db.Model):
     feed_url = db.Column(db.Text())
     last_update = db.Column(db.DateTime())
     name = db.Column(db.Text())
-    posts = relationship("Post", order_by=Post.id, back_populates="blogs")
+    posts = relationship("Post", order_by=Post.id, back_populates="blog")
     
     
 
