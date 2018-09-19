@@ -1,0 +1,10 @@
+{
+  "blogs": [
+    {
+      "name": "Derek's Blog",
+      "url": "https://derekweitzel.com",
+      "feed_url": "https://derekweitzel.com/feed.xml",
+      "tags": [  ]
+    },
+  ]
+}
