@@ -6,6 +6,8 @@ from dateutil.parser import parse
 import json
 import sqlalchemy
 import pytz
+from bs4 import BeautifulSoup
+import urllib.parse
 
 utc=pytz.UTC
 
@@ -13,6 +15,23 @@ utc=pytz.UTC
 namespaces = {
 'atom':"http://www.w3.org/2005/Atom"
 }
+
+def correct_links(html, blog_url):
+    
+    def is_relative(url):
+        #print(url)
+        return not bool(urllib.parse.urlparse(url).netloc)
+
+    soup = BeautifulSoup(html)
+    non_relative = soup.find_all('img', src=is_relative)
+    for link in non_relative:
+        print(link)
+        old_href = link['src']
+        link['src'] = urllib.parse.urljoin(blog_url, old_href)
+    return str(soup)
+
+
+
 
 def periodic():
     
@@ -76,7 +95,7 @@ def periodic():
             if not post.date or post.date < post_date:
                 # Update the post
                 post.title = entry.find("atom:title", namespaces).text
-                post.content = entry.find("atom:content", namespaces).text
+                post.content = correct_links(entry.find("atom:content", namespaces).text, cur_blog.url)
                 post.date = post_date
                 post.post_url = entry.find("atom:link", namespaces).attrib['href']
                 post.post_id = post_id
