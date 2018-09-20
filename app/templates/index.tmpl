@@ -36,28 +36,34 @@
       
       <!-- Content here -->
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-9">
           <!-- List of blog posts -->
           {% for post in posts %}
-          <section class="post">
-            <blockquote class="blockquote">
-              <h1 class="display-4"><a href="{{ post.post_url }}">{{ post.title }}</a></h1>
-              <footer class="blockquote-footer"><a href="{{ post.blog.url }}">{{ post.blog.name }}</a></footer>
-            </blockquote>
-            <p class="post-content">
-              {{ post.content }}
-            </p>
-          </section>
+          <div class="card post">
+            <div class="card-body">
+              <blockquote class="blockquote">
+                <h1><a href="{{ post.post_url }}">{{ post.title }}</a></h1>
+                <footer class="blockquote-footer"><a href="{{ post.blog.url }}">{{ post.blog.name }}</a></footer>
+              </blockquote>
+              <p class="post-content">
+                {{ post.content }}
+              </p>
+            </div>
+          </div>
           {% endfor %}
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3 blogs">
           <!-- Blogs -->
-          <h3>Blogs</h3>
-          <ul class="blog-list">
-            {% for blog in blogs %}
-            <li><a href="{{ blog.url }}">{{ blog.name }}</a></li>
-            {% endfor %}
-          </ul>
+          <div class="card">
+            <h3 class="card-header">Blogs</h3>
+            <div class="">
+              <ul class="list-group list-group-flush">
+                {% for blog in blogs %}
+                <li class="list-group-item"><a href="{{ blog.url }}">{{ blog.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
