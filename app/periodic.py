@@ -92,7 +92,7 @@ def periodic():
             post = db.session.query(models.Post).filter(models.Post.post_id == post_id).first()
             if not post:
                 post = models.Post()
-            if not post.date or post.date < post_date:
+            if not post.date or utc.localize(post.date) < post_date:
                 # Update the post
                 post.title = entry.find("atom:title", namespaces).text
                 post.content = correct_links(entry.find("atom:content", namespaces).text, cur_blog.url)
